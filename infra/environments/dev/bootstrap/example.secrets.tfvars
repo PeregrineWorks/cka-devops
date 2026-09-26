@@ -1,0 +1,5 @@
+environment   = ""
+gcp_project   = ""
+gcp_region    = ""
+bucket_prefix = ""
+operator      = ""
