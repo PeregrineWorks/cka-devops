@@ -1,0 +1,39 @@
+name: ci-dev
+
+on:
+  pull_request:
+    branches: [dev]
+  push:
+    branches: [dev]
+
+permissions:
+  contents: read
+
+env:
+  TF_VERSION: "~1.16.0"
+  TF_IN_AUTOMATION: "true"
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Check formatting
+        run: terraform fmt -check -recursive -diff infra
+
+      - name: Validate bootstrap
+        working-directory: infra/environments/dev/bootstrap
+        run: |
+          terraform init -backend=false -input=false
+          terraform validate
+
+      - name: Validate stack_identity
+        working-directory: infra/modules/stack_identity
+        run: |
+          terraform init -backend=false -input=false
+          terraform validate
