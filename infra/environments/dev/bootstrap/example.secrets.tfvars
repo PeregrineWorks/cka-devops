@@ -1,5 +1,5 @@
 environment   = ""
-gcp_project   = ""
+project_id   = ""
 gcp_region    = ""
 bucket_prefix = ""
 operator      = ""

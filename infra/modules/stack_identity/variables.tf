@@ -1,12 +1,12 @@
 variable environment {}
 variable operator {}
 
-variable gcp_project {}
+variable project_id {}
 
 variable state_bucket {}
-variable module {
+variable stack {
     type = string
-    description = "directory name of the module under modules/ - e.g. 'vms'"
+    description = "directory name of the module under environments/<envs>/ - e.g. 'network'"
 }
 variable project_roles {
     type = list(string)

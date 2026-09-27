@@ -15,6 +15,6 @@ terraform {
 
 # Runs with your own credentials. This is the only stack that uses them.
 provider "google" {
-  project = var.gcp_project
+  project = var.project_id
   region  = var.gcp_region
 }
