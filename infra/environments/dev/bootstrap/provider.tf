@@ -8,13 +8,11 @@ terraform {
   }
 
   backend "gcs" {
-    bucket = "harsh-cka-devops-terraform-dev-tfstate"
     prefix = "bootstrap"
   }
 }
 
-# Runs with your own credentials. This is the only stack that uses them.
 provider "google" {
   project = var.project_id
-  region  = var.gcp_region
+  region  = var.default_region
 }
