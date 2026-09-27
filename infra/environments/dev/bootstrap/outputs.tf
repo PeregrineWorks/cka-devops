@@ -1,3 +1,3 @@
-output "network_terraform_sa" {
-  value = module.network_identity.email
+output "networking_terraform_sa" {
+  value = module.networking_identity.email
 }

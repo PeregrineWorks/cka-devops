@@ -8,7 +8,6 @@ terraform {
   }
 
   backend "gcs" {
-    bucket = "harsh-cka-devops-terraform-dev-tfstate"
     prefix = "bootstrap"
   }
 }
