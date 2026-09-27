@@ -1,0 +1,32 @@
+name: todo-issues
+
+# Runs when a pull request into dev closes, and the job only continues if it
+# merged. A plain push trigger would not know which branch the TODOs came from.
+on:
+  pull_request:
+    branches: [dev]
+    types: [closed]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  create-issues:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Create issues from new TODOs
+        run: python .github/scripts/todo_to_issues.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+          MERGE_SHA: ${{ github.event.pull_request.merge_commit_sha }}
