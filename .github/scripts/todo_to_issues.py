@@ -36,6 +36,8 @@ DIFF_FILE_PATTERN = re.compile(r"^\+\+\+ b/(?P<path>.+)$")
 DIFF_HUNK_PATTERN = re.compile(r"^@@ -\d+(?:,\d+)? \+(?P<start>\d+)(?:,\d+)? @@")
 # gh caps list results at 30 unless told otherwise.
 GH_LIST_LIMIT = "1000"
+# This script's own docstring shows example TODOs, which must not become issues.
+IGNORED_PATHS = {".github/scripts/todo_to_issues.py"}
 
 
 @dataclass(frozen=True)
@@ -60,7 +62,9 @@ def parse_todos(diff: str) -> list[Todo]:
     lines = _new_file_lines(diff)
     todos = []
     for index, line in enumerate(lines):
-        match = TODO_PATTERN.search(line.source) if line.is_added else None
+        if not line.is_added or line.path in IGNORED_PATHS:
+            continue
+        match = TODO_PATTERN.search(line.source)
         if not match:
             continue
         tags = [tag.strip() for tag in (match["tags"] or "").split(",") if tag.strip()]
