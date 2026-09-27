@@ -2,10 +2,10 @@
 # This way, permissions are scoped using the "least privelege" principle
 
 resource "google_service_account" "terraform" {
-  project      = var.gcp_project
+  project      = var.project_id
   account_id   = "${var.environment}-${var.module}-terraform"
   display_name = "${var.environment}-${var.module}-terraform"
-  description  = "Terraform indentity for modules/${var.environment}-${var.module}"
+  description  = "Terraform indentity for modules/${var.module}"
 }
 
 resource "google_service_account_iam_member" "operator_impersonates" {
@@ -25,6 +25,6 @@ resource "google_storage_bucket_iam_member" "state" {
 resource "google_project_iam_member" "roles" {
   for_each = toset(var.project_roles)
   role     = each.value
-  project  = var.gcp_project
+  project  = var.project_id
   member   = "serviceAccount:${google_service_account.terraform.email}"
 }

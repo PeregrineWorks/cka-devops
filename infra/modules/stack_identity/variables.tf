@@ -1,7 +1,7 @@
 variable "environment" {}
 variable "operator" {}
 
-variable "gcp_project" {}
+variable "project_id" {}
 
 variable "state_bucket" {}
 variable "module" {

@@ -4,20 +4,23 @@ locals {
     "iam.googleapis.com",
     "iamcredentials.googleapis.com",
     "storage.googleapis.com",
+
+    "iap.googleapis.com",
+    "servicenetworking.googleapis.com",
   ]
 }
 
 resource "google_project_service" "apis" {
   for_each           = toset(local.apis)
   service            = each.value
-  project            = var.gcp_project
+  project            = var.project_id
   disable_on_destroy = false
 }
 
 resource "google_storage_bucket" "tf_state" {
   name                        = var.bucket_prefix
-  project                     = var.gcp_project
-  location                    = var.gcp_region
+  project                     = var.project_id
+  location                    = var.default_region
   uniform_bucket_level_access = true
   public_access_prevention    = "enforced"
 
