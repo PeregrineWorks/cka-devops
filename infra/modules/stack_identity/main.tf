@@ -1,11 +1,11 @@
-# Idea is that every module gets its own service account
+# Idea is that every stack gets its own service account
 # This way, permissions are scoped using the "least privelege" principle
 
 resource "google_service_account" "terraform" {
   project      = var.project_id
-  account_id   = "${var.environment}-${var.module}-terraform"
-  display_name = "${var.environment}-${var.module}-terraform"
-  description  = "Terraform indentity for modules/${var.module}"
+  account_id   = "${var.environment}-${var.stack}-terraform"
+  display_name = "${var.environment}-${var.stack}-terraform"
+  description  = "Terraform identity for environments/${var.environment}/${var.stack}"
 }
 
 resource "google_service_account_iam_member" "operator_impersonates" {
