@@ -7,6 +7,7 @@ locals {
 
     "iap.googleapis.com",
     "servicenetworking.googleapis.com",
+    "cloudresourcemanager.googleapis.com"
   ]
 }
 
