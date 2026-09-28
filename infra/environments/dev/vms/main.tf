@@ -1,9 +1,17 @@
-locals {
-  subnetwork = "projects/${var.project_id}/regions/${var.default_region}/subnetworks/${var.environment}-nodes"
+data "terraform_remote_state" "networking" {
+  backend = "gcs"
+  config = {
+    bucket = "harsh-cka-devops-terraform-dev-tfstate"
+    prefix = "dev/networking"
+  }
+}
 
-  k8s_node_tag         = "k8s-node"
-  k8s_controlplane_tag = "k8s-controlplane"
-  k8s_worker_tag       = "k8s-worker"
+locals {
+  subnetwork           = data.terraform_remote_state.networking.outputs.nodes_subnetwork_id
+  k8s_node_tag         = data.terraform_remote_state.networking.outputs.k8s_node_tag
+  k8s_controlplane_tag = data.terraform_remote_state.networking.outputs.k8s_controlplane_tag
+
+  k8s_worker_tag = "k8s-worker"
 
   zone              = "${var.default_region}-a"
   node_machine_type = "e2-medium"
