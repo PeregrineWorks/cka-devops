@@ -16,5 +16,5 @@ terraform {
 provider "google" {
   project                     = var.project_id
   region                      = var.default_region
-  impersonate_service_account = var.terraform_service_account
+  impersonate_service_account = var.vms_sa
 }

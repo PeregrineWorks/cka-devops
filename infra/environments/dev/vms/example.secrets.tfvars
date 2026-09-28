@@ -1,5 +1,5 @@
 environment                = ""
 project_id                 = ""
 default_region             = ""
-vms_service_account        = ""
+vms_sa                     = ""
 vm_runtime_service_account = ""

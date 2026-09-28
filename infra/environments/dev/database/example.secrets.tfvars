@@ -1,4 +1,4 @@
-environment              = ""
-project_id               = ""
-default_region           = ""
-database_service_account = ""
+environment    = ""
+project_id     = ""
+default_region = ""
+database_sa    = ""
