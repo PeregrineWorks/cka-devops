@@ -49,12 +49,12 @@ resource "google_dns_managed_zone" "internal" {
   }
 }
 
-resource "google_dns_record_set" "controlplane" {
+resource "google_dns_record_set" "kube_apiserver" {
   managed_zone = google_dns_managed_zone.internal.name
   name         = "k8s-api.${local.dns_name}"
   type         = "CNAME"
-  ttl          = locals.record_ttl
-  rrdatas      = [google_dns_record_set.controlplane.name]
+  ttl          = local.record_ttl
+  rrdatas      = [google_dns_record_set.kube_apiserver.name]
 }
 
 resource "google_dns_record_set" "worker_1" {
