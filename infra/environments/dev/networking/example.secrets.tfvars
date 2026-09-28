@@ -1,4 +1,4 @@
-environment               = ""
-project_id                = ""
-default_region            = ""
-terraform_service_account = ""
+environment                = ""
+project_id                 = ""
+default_region             = ""
+networking_service_account = ""
