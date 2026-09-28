@@ -1,5 +1,4 @@
 variable "environment" {}
-
 variable "project_id" {}
 variable "default_region" {}
-variable "networking_sa" {}
+variable "dns_sa" {}

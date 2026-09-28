@@ -9,12 +9,12 @@ terraform {
 
   backend "gcs" {
     bucket = "harsh-cka-devops-terraform-dev-tfstate"
-    prefix = "dev/networking"
+    prefix = "dev/vms"
   }
 }
 
 provider "google" {
   project                     = var.project_id
   region                      = var.default_region
-  impersonate_service_account = var.networking_sa
+  impersonate_service_account = var.vms_sa
 }

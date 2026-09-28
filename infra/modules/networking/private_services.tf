@@ -7,6 +7,8 @@ locals {
 #* === Private Services
 #* ====================================================================
 
+# Creating a "private service"/peering between the vpc and
+# google's network
 resource "google_compute_global_address" "private_services" {
   name          = "${var.environment}-private-services"
   network       = google_compute_network.vpc.id
@@ -20,5 +22,5 @@ resource "google_service_networking_connection" "private_services" {
   network                 = google_compute_network.vpc.id
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.private_services.name]
-  deletion_policy         = "REMOVE_PEERING"
+  deletion_policy         = "ABANDON"
 }

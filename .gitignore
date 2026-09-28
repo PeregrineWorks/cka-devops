@@ -1,6 +1,6 @@
 docs/
 
-secrets.*
+*-secrets.*
 *.tfvars.json
 .terraform/
 .venv/
