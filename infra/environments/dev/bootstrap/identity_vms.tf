@@ -35,7 +35,7 @@ resource "google_project_iam_member" "vm_runtime_log_writer" {
 }
 
 resource "google_project_iam_member" "vm_runtime_metric_writer" {
-  project = var.default_region
+  project = var.project_id
   role    = "roles/monitoring.metricWriter"
   member  = "serviceAccount:${google_service_account.vm_runtime.email}"
 }
