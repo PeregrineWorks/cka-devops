@@ -1,0 +1,5 @@
+environment                = ""
+project_id                 = ""
+default_region             = ""
+terraform_service_account  = ""
+vm_runtime_service_account = ""
