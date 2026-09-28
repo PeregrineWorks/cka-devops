@@ -10,6 +10,7 @@ locals {
     "servicenetworking.googleapis.com",
     "cloudresourcemanager.googleapis.com",
 
+    "sqladmin.googleapis.com",
     "dns.googleapis.com",
   ]
 }

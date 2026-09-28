@@ -49,12 +49,20 @@ resource "google_dns_managed_zone" "internal" {
   }
 }
 
+resource "google_dns_record_set" "controlplane" {
+  managed_zone = google_dns_managed_zone.internal.name
+  name         = "cp-1.${local.dns_name}"
+  type         = "A"
+  ttl          = local.record_ttl
+  rrdatas      = [data.google_compute_instance.controlplane.network_interface[0].network_ip]
+}
+
 resource "google_dns_record_set" "kube_apiserver" {
   managed_zone = google_dns_managed_zone.internal.name
   name         = "k8s-api.${local.dns_name}"
   type         = "CNAME"
   ttl          = local.record_ttl
-  rrdatas      = [google_dns_record_set.kube_apiserver.name]
+  rrdatas      = [google_dns_record_set.controlplane.name]
 }
 
 resource "google_dns_record_set" "worker_1" {
