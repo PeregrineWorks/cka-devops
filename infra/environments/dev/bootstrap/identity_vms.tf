@@ -33,3 +33,9 @@ resource "google_project_iam_member" "vm_runtime_log_writer" {
   role    = "roles/logging.logWriter"
   member  = "serviceAccount:${google_service_account.vm_runtime.email}"
 }
+
+resource "google_project_iam_member" "vm_runtime_metric_writer" {
+  project = var.default_region
+  role    = "roles/monitoring.metricWriter"
+  member  = "serviceAccount:${google_service_account.vm_runtime.email}"
+}
