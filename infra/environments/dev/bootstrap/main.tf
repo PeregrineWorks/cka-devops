@@ -2,6 +2,7 @@ locals {
   apis = [
     "compute.googleapis.com",
     "iam.googleapis.com",
+    "secretmanager.googleapis.com",
     "iamcredentials.googleapis.com",
     "storage.googleapis.com",
 
